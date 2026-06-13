@@ -12,7 +12,7 @@
     "try-creative": false
   },
   "position": {
-    "enabled": true,
+    "enabled": false,
     "x": 0,
     "y": 100,
     "z": 0
@@ -20,7 +20,9 @@
   "utils": {
     "auto-auth": {
       "enabled": true,
-      "password": "chalol78"
+      "password": "chalol78",
+      "delay-min": 1200,
+      "delay-max": 3000
     },
     "anti-afk": {
       "enabled": true,
@@ -30,11 +32,64 @@
       "enabled": true,
       "repeat": true,
       "repeat-delay": 120,
+      "repeat-delay-random": 60,
       "messages": [
-        "I'm a regular player",
-        "Subscribe to Slobos!",
-        "I like to play Minecraft!"
+        "alguem ai?",
+        "que servidor bom",
+        "to farmando aqui",
+        "boa galera",
+        "esse server e demais"
       ]
+    },
+    "chat-log": true,
+    "auto-reconnect": true,
+    "auto-reconnect-delay": 5000,
+    "max-reconnect-delay": 120000
+  },
+  "movement": {
+    "enabled": true,
+    "circle-walk": {
+      "enabled": true,
+      "radius": 3,
+      "speed": 4000
+    },
+    "look-around": {
+      "enabled": true,
+      "interval": 7000
+    },
+    "random-jump": {
+      "enabled": true,
+      "interval": 15000
+    }
+  },
+  "modules": {
+    "avoidMobs": false,
+    "combat": true,
+    "beds": false,
+    "chat": true,
+    "console-commands": true
+  },
+  "combat": {
+    "attack-mobs": true,
+    "auto-eat": true
+  },
+  "beds": {
+    "pick-up-day": false,
+    "place-night": false
+  },
+  "discord": {
+    "enabled": false,
+    "webhookUrl": "YOUR_DISCORD_WEBHOOK_URL_HERE",
+    "events": {
+      "connect": true,
+      "disconnect": true,
+      "chat": false
+    }
+  },
+  "chat": {
+    "respond": true
+  }
+}      ]
     },
     "chat-log": true,
     "auto-reconnect": true,
