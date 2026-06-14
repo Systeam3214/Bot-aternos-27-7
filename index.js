@@ -1632,28 +1632,27 @@ function initializeModules(bot, mcData, defaultMove) {
 // ============================================================
 // MOVEMENT HELPERS
 // ============================================================
-function startCircleWalk(bot, defaultMove) {
-  const radius = config.movement["circle-walk"].radius;
+function startCircleWalk(bot) {
   let angle = 0;
-  let lastPathTime = 0;
 
   addInterval(() => {
     if (!bot || !botState.connected) return;
-    const now = Date.now();
-    if (now - lastPathTime < 2000) return;
-    lastPathTime = now;
     try {
-      const x = bot.entity.position.x + Math.cos(angle) * radius;
-      const z = bot.entity.position.z + Math.sin(angle) * radius;
-      bot.pathfinder.setMovements(defaultMove);
-      bot.pathfinder.setGoal(
-        new GoalBlock(
-          Math.floor(x),
-          Math.floor(bot.entity.position.y),
-          Math.floor(z),
-        ),
-      );
+      // Look at a new angle
+      bot.look(angle, 0, true);
       angle += Math.PI / 4;
+      if (angle >= Math.PI * 2) angle = 0;
+
+      // Walk forward briefly without using pathfinder to avoid CPU lag
+      if (typeof bot.setControlState === "function") {
+        bot.setControlState("forward", true);
+        setTimeout(() => {
+          if (bot && botState.connected && typeof bot.setControlState === "function") {
+            bot.setControlState("forward", false);
+          }
+        }, 800);
+      }
+      
       botState.lastActivity = Date.now();
     } catch (e) {
       addLog("[CircleWalk] Error:", e.message);
